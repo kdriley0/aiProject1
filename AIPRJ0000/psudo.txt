@@ -1,0 +1,15 @@
+what I need 
+a static 2 d array 2 by 2 
+final int size =2;
+
+Scanner in = new Scanner(System.in);
+blank game board method? class?
+
+commands 
+public void show()
+0-9? wtf is 9?
+ 
+exit 
+
+public static void reset()
+ 
