@@ -43,17 +43,17 @@ public class AIPRJ0000 {
             if(in.equalsIgnoreCase("r")){
                 b1.reset();
             }
-//            if(b1.hasWon(b1.board)){
-//                System.out.println("player has won");
-//                System.out.println("would you like to play again y for yes n for no");
-//                in = scan.nextLine();
-//                if(in.equalsIgnoreCase("n")){
-//                    System.out.println("Thanks for playing ");
-//                    break;
-//                }else {
-//                    b1.reset(b1.board);
-//                }
-//            }
+            if(b1.hasWon(1)){
+                System.out.println("player has won");
+                System.out.println("would you like to play again y for yes n for no");
+                in = scan.nextLine();
+                if(in.equalsIgnoreCase("n")){
+                    System.out.println("Thanks for playing ");
+                    break;
+                }else {
+                    b1.reset();
+                }
+            }
            
             
         

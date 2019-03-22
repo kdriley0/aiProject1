@@ -106,8 +106,16 @@ public class GameBoard {
                 + "6, 7, 8");
     }
     
-    public boolean hasWon(String[] b){
+    public boolean hasWon(int player){
         
-        return false;
+        return (
+                (this.board[0][0]+this.board[0][1]+this.board[0][2]==player*3) ||//across lvl 0
+                (this.board[0][0]+this.board[1][0]+this.board[2][0]==player*3) ||//down lvl 0
+                (this.board[1][0]+this.board[1][1]+this.board[1][2]==player*3) ||//accross lvl 1
+                (this.board[2][0]+this.board[2][1]+this.board[2][2]==player*3) ||//across lvl 2
+                (this.board[0][1]+this.board[1][1]+this.board[2][1]==player*3) ||//down lvl 1
+                (this.board[0][2]+this.board[1][2]+this.board[2][2]==player*3) ||//down lvl 2
+                (this.board[0][0]+this.board[1][1]+this.board[2][2]==player*3) ||//across going right
+                (this.board[0][2]+this.board[1][1]+this.board[2][0]==player*3) );//across going left
     }
 }
