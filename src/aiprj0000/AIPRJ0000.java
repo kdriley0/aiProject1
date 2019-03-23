@@ -17,6 +17,7 @@ public class AIPRJ0000 {
 
     public static void main(String[] args) {
 
+        Game g = new Game();
         GameBoard b1 = new GameBoard();
         String[] board = new String[9];
         b1.reset();
@@ -31,7 +32,7 @@ public class AIPRJ0000 {
             System.out.println("You can type in 0-8 to move there or type in ? for help or exit to quit or r to reset");
             in = scan.nextLine();
             c=in.charAt(0);
-            
+            System.out.println("it now the computers turn threre are "+g.getAvalMoves(b1.board));
             
             if(in.equalsIgnoreCase("?")){
                 b1.help();
