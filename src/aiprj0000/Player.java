@@ -11,5 +11,13 @@ package aiprj0000;
  */
 public class Player {
     
+    int symbol;
+    Player(int s){
+        symbol=s;
+    }
+    public int getPlayer(){
+        return symbol;
+    }
+    
     
 }

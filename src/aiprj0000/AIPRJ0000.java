@@ -17,34 +17,35 @@ public class AIPRJ0000 {
 
     public static void main(String[] args) {
 
-        Game g = new Game();
-        GameBoard b1 = new GameBoard();
+        Ai g = new Ai();
+        GameBoard gb = new GameBoard();
         String[] board = new String[9];
-        b1.reset();
+        gb.reset();
        // System.out.println(b1.toString());
         Scanner scan = new Scanner(System.in);
         String in = "";
         System.out.println("What would you like to do?");
         char c = 'x'; 
         int move=0;
-        while (!in.equalsIgnoreCase("quit")) {
-            System.out.println(b1.toString());
+        while (!in.equalsIgnoreCase("quit")&&!in.equalsIgnoreCase("q")&&!in.equalsIgnoreCase("exit")) {
+            System.out.println(gb.toString());
             System.out.println("You can type in 0-8 to move there or type in ? for help or exit to quit or r to reset");
             in = scan.nextLine();
             c=in.charAt(0);
-            System.out.println("it now the computers turn threre are "+g.getAvalMoves(b1.board));
-            
+           
+            gb.move(g.findNextMove(),-1);                                                                                           // change later
             if(in.equalsIgnoreCase("?")){
-                b1.help();
+                gb.help();
             }
             if(Character.isDigit(c)){
                 move=Integer.parseInt(in);
-                b1.move(move,1);
+                gb.move(move,1);
             }
+             System.out.println("it now the computers turn threre are have been "+g.getMovesTaken(gb.board));
             if(in.equalsIgnoreCase("r")){
-                b1.reset();
+                gb.reset();
             }
-            if(b1.hasWon(1)){
+            if(gb.hasWon(1)){
                 System.out.println("player has won");
                 System.out.println("would you like to play again y for yes n for no");
                 in = scan.nextLine();
@@ -52,7 +53,7 @@ public class AIPRJ0000 {
                     System.out.println("Thanks for playing ");
                     break;
                 }else {
-                    b1.reset();
+                    gb.reset();
                 }
             }
            
@@ -60,5 +61,6 @@ public class AIPRJ0000 {
         
         }
     }
+    
 
 }
