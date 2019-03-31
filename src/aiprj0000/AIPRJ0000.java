@@ -35,7 +35,7 @@ public class AIPRJ0000 {
         gb.reset();
 
         // System.out.println(b1.toString());
-        boolean turn = r.nextBoolean();
+         turn = r.nextBoolean();
 
         System.out.println("Welcome to Tic Tak Toe!");
 
@@ -58,7 +58,7 @@ public class AIPRJ0000 {
                 humanTurn();
             } else if (ai.symbol == 1) {//ai is X
                 //gb.move(g.findNextMove(), ai.symbol);                                                                                          
-                System.out.println(gb.toString());//printing out the gb
+                System.out.println("the ai is going first");
                 aiTurn();
             }
             if (h.symbol == 1 && turnsTaken % 2 == 0) {
@@ -127,7 +127,7 @@ public class AIPRJ0000 {
     public static void aiTurn() {
 
         EvalFcn ef = new EvalFcn(gb.board, ai);
-        gb.move(ef.makeMove(), ai.symbol);
+       while( !gb.move(ef.makeMove(), ai.symbol));// so that the computer make a move
         turnsTaken++;
         System.out.println("it now the computers turn threre are have been " + g.getMovesTaken(gb.board));
         System.out.println(gb.toString());//printing out the gb

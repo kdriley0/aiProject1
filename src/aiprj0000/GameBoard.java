@@ -47,11 +47,19 @@ public class GameBoard {
     }
 
     public boolean move(int m, int turn) {
+         int  k=0,x=0;
         if (m < 0 || m > 8) {
             
             return false;
         }
-         int  k=0;
+        if(turn==-1){
+            System.out.println("invalid ");
+        }
+        if(x==0){
+            System.out.println(turn+" moves "+m);
+        }
+        
+        
         for (int i = 0; i < size; ++i) {
            for(int j =0; j< size;j++){
                if(k==m&&this.board[i][j]==EMPTY){

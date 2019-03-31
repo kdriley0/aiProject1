@@ -16,9 +16,7 @@ public class EvalFcn {
 
     Player ai;
     boolean middleTaken = false;
-    static int[] winAcross = new int[3];
-    static int[] winDown = new int[3];
-    static int[] winDi = new int[2];
+    Player h = new Player(1);
     Random r = new Random();
     int movesTaken;
     int rand = 0;
@@ -31,109 +29,89 @@ public class EvalFcn {
         this.board = board;
         movesTaken = 0;
         this.ai = ai;
+        if (ai.symbol == 1) {
+            aiX = true;
+            h = new Player(-1);
+        }
+
     }
 
     public int makeMove() {
-        movesTaken = this.getMovesTaken(this.board, ai);
-        if (movesTaken == 0) {
-            return 4;
-        } else if (movesTaken == 1 && !middleTaken) {
-            return 4;
-        } else if (movesTaken == 1 && middleTaken) {
-            rand = r.nextInt(3);
-            switch (rand) {
-                case 0:
-                    return 0;
-                case 1:
-                    return 2;
-                case 2:
-                    return 6;
-                case 3:
-                    return 8;
-            }
-            if (movesTaken == 2) {
-                
-            }
-        }
-        return -1;
-    }
-
-    public int getMovesTaken(int[][] b, Player ai) {
-        int m = 0;
-        for (int i = 0; i < size; ++i) {
-            for (int j = 0; j < size; j++) {
-                if (b[i][j] != 0) {
-                    m++;
+        movesTaken = ai.getMovesTaken(this.board, ai);
+        int i, j, k;
+        switch (movesTaken) {
+            case 0:
+                return 4;
+            case 1:
+                if (movesTaken == 1 && !middleTaken) {
+                    return 4;
+                } else if (movesTaken == 1 && middleTaken) {
+                    rand = r.nextInt(3);
+                    switch (rand) {
+                        case 0:
+                            return 0;
+                        case 1:
+                            return 2;
+                        case 2:
+                            return 6;
+                        case 3:
+                            return 8;
+                    }
                 }
-            }
+            case 2:
+                if (aiX) {
+                    rand = r.nextInt(3);
+                    switch (rand) {
+                        case 0:
+                            return 0;
+                        case 1:
+                            return 2;
+                        case 2:
+                            return 6;
+                        case 3:
+                            return 8;
+                    }
+                }
+            case 3:
+                h.getMovesTaken(board, h);
+                for (i = 0; i < 3; i++) {
+                    if (h.winAcross[i] == 2) {
+                        for (j = 0; j < 3; j++) {
+                            if (board[i][j] == 0) {
+                                return (i * 3 + j);
+                            }
+                        }
+                    }
+                    if(h.winDown[i]==2){
+                        if(isTaken(this.board,i)&&isTaken(this.board,i+3)){
+                            return i+6;
+                        }else if(isTaken(this.board,i+6)&&isTaken(this.board,i+3)){
+                            return i;
+                        }else if(isTaken(this.board,i+6)&&isTaken(this.board,i)){
+                            return i+3;
+                        }
+                        
+                    }
+                }
         }
-        if (b[1][1] != ai.symbol) {
-            middleTaken = true;
-        }
-        setWinDown(b, this.ai.symbol);
-        setWinAcross(b, this.ai.symbol);
-        setWinDi(b, this.ai.symbol);
-        return m;
-    }
 
-    public static void setWinAcross(int[][] b, int p) {
-        int win = 0, i, j;
-        for (i = 0; i < size; ++i) {
+    
+
+
+return -1;
+    }
+    public static boolean isTaken(int[][] b,int m){
+         int win = 0, i, j, k = 0;
+          for (i = 0; i < size; ++i) {
             for (j = 0; j < size; j++) {
-                if (b[i][j] == p) {
-                    win++;
+                if(k==m&&b[i][j]!=0){
+                    return true;
                 }
             }
-
-            winAcross[j] = win;
-        }
-
+          }
+          return false;
     }
 
-    public static void setWinDown(int[][] b, int p) {
-        int win = 0, i, j, k = 0;
-        for (i = 0; i < size; ++i) {
-            for (j = 0; j < size; j++) {
-
-                if (k % 3 == 0) {
-                    winDown[0]++;
-                }
-                if (k % 3 == 1) {
-                    winDown[1]++;
-                }
-                if (k % 3 == 2) {
-                    winDown[2]++;
-                }
-                k++;
-            }
-
-        }
-
-    }
-
-    public static void setWinDi(int[][] b, int p) {
-
-        if (b[0][0] == p) {
-
-            winDi[0]++;
-        }
-        if (b[1][1] == p) {
-            winDi[0]++;
-            winDi[1]++;
-        }
-        if (b[2][2] == p) {
-
-            winDi[0]++;
-        }
-        if (b[0][2] == p) {
-
-            winDi[1]++;
-        }
-        if (b[2][0] == p) {
-
-            winDi[1]++;
-        }
-
-    }
+   
 
 }
